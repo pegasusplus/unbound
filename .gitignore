@@ -1,5 +1,6 @@
 *.lo
 *.o
+/.vs/
 /.libs/
 /.source
 /Makefile

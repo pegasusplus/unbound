@@ -56,10 +56,10 @@ smart_compare(sldns_buffer* pkt, uint8_t* dnow,
 	if(LABEL_IS_PTR(*dnow)) {
 		/* ptr points to a previous dname */
 		uint8_t* p;
-		if((size_t)PTR_OFFSET(dnow[0], dnow[1])
-			>= sldns_buffer_limit(pkt))
+		size_t ptr_offset = PTR_OFFSET(dnow[0], dnow[1]);
+		if(ptr_offset >= sldns_buffer_limit(pkt))
 			return -1;
-		p = sldns_buffer_at(pkt, PTR_OFFSET(dnow[0], dnow[1]));
+		p = sldns_buffer_at(pkt, ptr_offset);
 		if( p == dprfirst || p == dprlast )
 			return 0;
 		/* prev dname is also a ptr, both ptrs are the same. */
